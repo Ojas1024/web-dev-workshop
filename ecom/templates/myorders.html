@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My Orders</h2>
+
+    {% if orders %}
+        <div class="row">
+            {% for order in orders %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ order.product.img_url.url }}" class="card-img-top" alt="{{ order.product.title }}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ order.product.title }}</h5>
+                            <p class="text-muted">Ordered on: {{ order.ordered_at|date:"F d, Y, H:i A" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">You haven't placed any orders yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Payment Successful! 🎉</h2>
+    <p>Thank you for purchasing <strong>{{ product.title }}</strong></p>
+    <a href="/myorders" class="btn btn-primary mt-3 mb-3">Check my orders</a>
+</div>
+{% endblock %}

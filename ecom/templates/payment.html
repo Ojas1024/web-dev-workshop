@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="flex items-center justify-center min-h-screen py-12">
+    <div class="bg-opacity-10 backdrop-blur-lg border border-white border-opacity-20 shadow-lg rounded-lg p-8 w-full max-w-lg text-center text-white">
+        <h2 class="text-2xl font-semibold mb-4">Pay for {{ product.title }}</h2>
+        <p class="mb-4 text-black" >{{ product.description }}</p>
+        <p class="mb-4 text-lg font-bold text-black">
+            Amount: Rs. {{ rs }}
+        </p>
+        
+        <form id="payment-form" method="POST" action="/capture_payment/">
+            {% csrf_token %}
+            <script 
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="{{ razorpay_key }}"
+                data-image="{% static 'logo.svg' %}"
+                data-amount="{{ amount }}"
+                data-currency="INR"
+                data-order_id="{{ order_id }}"
+                data-buttontext="Pay Now"
+                data-name="ShopEase"
+                data-description="{{ product.title }}">
+            </script>
+        </form>
+    </div>
+</div>
+
+<style>
+    .razorpay-payment-button {
+        border: 2px solid white !important;
+        border-radius: 8px !important;
+        padding: 10px 20px !important;
+        font-weight: bold !important;
+        background-color: transparent !important;
+        color: rgb(0, 0, 0) !important;
+        transition: 0.3s ease-in-out;
+    }
+    .razorpay-payment-button{
+        color: black!important;
+    }
+    .razorpay-payment-button:hover {
+        background-color: white !important;
+        color: black !important;
+    }
+</style>
+
+{% endblock %}

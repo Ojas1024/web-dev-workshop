@@ -1,0 +1,31 @@
+{%extends 'base.html' %}
+    {%load static%}
+{%block content %}
+    <!-- Hero Section -->
+    <div class="hero text-center">
+        <h1>Check out what's new in {{category.title}}</h1>
+    </div>
+
+    <!-- Featured Products -->
+    <div class="container my-5" id="products">
+        <h2 class="text-center mb-4" >{{category.description}}</h2>
+        <div class="row" style="justify-content: space-around;">
+            {%for i in products%}
+            <div class="col-md-4" >
+                <div class="card product-card">
+                    <img src="{{i.img_url.url}}" class="card-img-top" alt="Product" style="object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{i.title }}</h5>
+                        <p class="card-text">{{i.description}}</p>
+                        {% if i.quantity < 1 %}
+                        <a href="/product/{{i.pk}}" class="btn btn-disabled">Sold</a>
+                        {%else%}
+                        <a href="/product/{{i.pk}}" class="btn btn-success">Buy Now</a>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    {%endblock%}

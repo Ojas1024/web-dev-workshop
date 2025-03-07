@@ -1,0 +1,44 @@
+{%extends 'base.html' %}
+    {%load static%}
+{%block content %}
+    <!-- Hero Section -->
+    <div class="hero text-center">
+        <h1>Discover the Best Deals</h1>
+    </div>
+
+    <!-- Featured Products -->
+    <div class="container my-5" id="products">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row" style="justify-content: space-around;">
+            {%for i in featured%}
+            <div class="col-md-4">
+                <div class="card product-card">
+                    <img src="{{i.img_url.url}}" class="card-img-top" alt="Product" style="object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{i.title }}</h5>
+                        <p class="card-text">{{i.description}}</p>
+                        <a href="/product/{{i.pk}}" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="container my-5" id="categories">
+        <h2 class="text-center mb-4">Shop by Category</h2>
+        <div class="row" style="justify-content: space-around;">
+            {%for i in categories %}
+            <div class="col-md-3" onclick="window.location.href='/category/{{i.pk}}'">
+                <div class="card category-card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{i.title}}</h5>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+{%endblock%}
